@@ -1,0 +1,6 @@
+build
+dist
+venv
+.idea
+TemporalProcessor.spec
+version_info.txt

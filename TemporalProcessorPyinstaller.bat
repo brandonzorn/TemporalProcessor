@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onefile --windowed --icon "pkg_res/icon.ico" --name "TemporalProcessor" --version-file "pkg_res/version_info.txt" main.py
