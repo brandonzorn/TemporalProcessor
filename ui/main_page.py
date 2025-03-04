@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main.ui'
+## Form generated from reading UI file 'main_page.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.2
 ##
@@ -15,10 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QFrame, QGraphicsView,
-    QHBoxLayout, QHeaderView, QLabel, QPushButton,
-    QSizePolicy, QSlider, QTableWidget, QTableWidgetItem,
-    QTextBrowser, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QDockWidget,
+    QFrame, QGraphicsView, QHBoxLayout, QHeaderView,
+    QLabel, QPushButton, QSizePolicy, QSlider,
+    QTableWidget, QTableWidgetItem, QTextBrowser, QVBoxLayout,
+    QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -76,15 +77,38 @@ class Ui_Form(object):
 
         self.verticalLayout_3 = QVBoxLayout()
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.relationships_table = QTableWidget(Form)
+        self.dockWidget = QDockWidget(Form)
+        self.dockWidget.setObjectName(u"dockWidget")
+        self.dockWidget.setFeatures(QDockWidget.DockWidgetFeature.DockWidgetMovable)
+        self.dockWidgetContents = QWidget()
+        self.dockWidgetContents.setObjectName(u"dockWidgetContents")
+        self.verticalLayout_4 = QVBoxLayout(self.dockWidgetContents)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.relationships_table = QTableWidget(self.dockWidgetContents)
         self.relationships_table.setObjectName(u"relationships_table")
+        self.relationships_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
 
-        self.verticalLayout_3.addWidget(self.relationships_table)
+        self.verticalLayout_4.addWidget(self.relationships_table)
 
-        self.textBrowser = QTextBrowser(Form)
+        self.dockWidget.setWidget(self.dockWidgetContents)
+
+        self.verticalLayout_3.addWidget(self.dockWidget)
+
+        self.dockWidget_2 = QDockWidget(Form)
+        self.dockWidget_2.setObjectName(u"dockWidget_2")
+        self.dockWidget_2.setFeatures(QDockWidget.DockWidgetFeature.DockWidgetMovable)
+        self.dockWidgetContents_2 = QWidget()
+        self.dockWidgetContents_2.setObjectName(u"dockWidgetContents_2")
+        self.verticalLayout_5 = QVBoxLayout(self.dockWidgetContents_2)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.textBrowser = QTextBrowser(self.dockWidgetContents_2)
         self.textBrowser.setObjectName(u"textBrowser")
 
-        self.verticalLayout_3.addWidget(self.textBrowser)
+        self.verticalLayout_5.addWidget(self.textBrowser)
+
+        self.dockWidget_2.setWidget(self.dockWidgetContents_2)
+
+        self.verticalLayout_3.addWidget(self.dockWidget_2)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout_3)
@@ -101,6 +125,8 @@ class Ui_Form(object):
         self.stop_button.setText(QCoreApplication.translate("Form", u"\u0421\u0442\u043e\u043f", None))
         self.update_button.setText(QCoreApplication.translate("Form", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c", None))
         self.time_label.setText(QCoreApplication.translate("Form", u"\u0412\u0440\u0435\u043c\u044f: 0", None))
+        self.dockWidget.setWindowTitle(QCoreApplication.translate("Form", u"\u0422\u0435\u043c\u043f\u043e\u0440\u0430\u043b\u044c\u043d\u044b\u0435 \u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u044f", None))
+        self.dockWidget_2.setWindowTitle(QCoreApplication.translate("Form", u"\u0422\u0438\u043f\u044b \u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u0439", None))
         self.textBrowser.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

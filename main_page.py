@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
 )
 
 from models import Event, EventStatus
-from ui.main import Ui_Form
+from ui.main_page import Ui_Form
 
 
 class MainPage(QWidget):
@@ -32,6 +32,7 @@ class MainPage(QWidget):
 
         self.scene = QGraphicsScene()
         self.ui.graphicsView.setScene(self.scene)
+        self.ui.graphicsView.resizeEvent = self.graphics_view_resize_event
 
         self.observer_line = QGraphicsLineItem(0, 0, 0, 500)
         self.observer_line.setPen(QPen(QColor(255, 0, 0), 2))
@@ -43,12 +44,14 @@ class MainPage(QWidget):
 
         self.build_scene()
 
-    def resizeEvent(self, event):
+    def graphics_view_resize_event(self, event):
         super().resizeEvent(event)
         self.ui.graphicsView.fitInView(
             self.scene.sceneRect(),
             Qt.AspectRatioMode.KeepAspectRatio,
         )
+        view_rect = self.ui.graphicsView.mapFromScene(self.scene.sceneRect()).boundingRect()
+        self.ui.horizontalSlider.setMaximumWidth(view_rect.width())
 
     def update_observer_position(self):
         position = self.ui.horizontalSlider.value()
