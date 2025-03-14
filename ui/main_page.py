@@ -68,6 +68,7 @@ class Ui_Form(object):
 
         self.horizontalSlider = QSlider(Form)
         self.horizontalSlider.setObjectName(u"horizontalSlider")
+        self.horizontalSlider.setMaximum(100)
         self.horizontalSlider.setOrientation(Qt.Orientation.Horizontal)
 
         self.verticalLayout_2.addWidget(self.horizontalSlider)

@@ -21,9 +21,6 @@ class MainPage(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
-        self.ui.horizontalSlider.setMinimum(0)
-        self.ui.horizontalSlider.setMaximum(100)
-        self.ui.horizontalSlider.setValue(0)
         self.ui.horizontalSlider.valueChanged.connect(self.update_observer_position)
 
         self.ui.start_button.clicked.connect(self.start_simulation)
@@ -40,6 +37,7 @@ class MainPage(QWidget):
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_events)
 
+        self.num_rects = 8
         self.events: list[Event] = []
 
         self.build_scene()
@@ -69,7 +67,7 @@ class MainPage(QWidget):
         self.events.clear()
         self.scene.clear()
 
-        self.generate_processes()
+        self.generate_events()
         self.add_time_labels()
         self.observer_line = QGraphicsLineItem(0, 0, 0, 500)
         self.observer_line.setPen(QPen(QColor(255, 0, 0), 2))
@@ -77,7 +75,7 @@ class MainPage(QWidget):
 
         self.update_observer_position()
 
-    def generate_processes(self):
+    def generate_events(self):
         colors = [
             QColor("#8A2BE2"),
             QColor("#1E90FF"),
@@ -86,7 +84,7 @@ class MainPage(QWidget):
             QColor("#FFA07A"),
         ]
 
-        for i in range(8):
+        for i in range(self.num_rects):
             start = random.randint(0, 50)
             end = start + random.randint(20, 50)
 
@@ -101,10 +99,9 @@ class MainPage(QWidget):
 
             event = Event(i + 1, start, end, rect)
             self.scene.addItem(event.label)
-
             self.events.append(event)
 
-        self.generate_process_relationships()
+        self.generate_event_relationships()
 
     def update_observer_line(self, position):
         x_position = position * 5
@@ -133,7 +130,7 @@ class MainPage(QWidget):
             event.set_status(status)
             event.rect.setOpacity(1.0 if event.status == EventStatus.IN_PROGRESS else 0.5)
 
-    def generate_process_relationships(self):
+    def generate_event_relationships(self):
         self.ui.relationships_table.setColumnCount(len(self.events))
         self.ui.relationships_table.setRowCount(len(self.events))
 
@@ -145,9 +142,9 @@ class MainPage(QWidget):
         self.ui.relationships_table.setHorizontalHeaderLabels(event_names)
         self.ui.relationships_table.setVerticalHeaderLabels(event_names)
 
-        for i, eventi in enumerate(self.events):
-            for j, eventj in enumerate(self.events):
+        for i, event_i in enumerate(self.events):
+            for j, event_j in enumerate(self.events):
                 if i != j:
-                    relationship = eventi.get_relationship(eventj)
+                    relationship = event_i.get_relationship(event_j)
                     self.ui.relationships_table.setItem(i, j, QTableWidgetItem(relationship))
                     self.ui.relationships_table.setItem(j, i, QTableWidgetItem(relationship))
